@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PersonaAI — Smart Landing Page Personalization</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- SLOT LIST: nav-cta, hero-eyebrow, headline, subheadline, cta-primary, cta-secondary, social-proof-number, social-proof-label, stat-1-number, stat-1-label, stat-2-number, stat-2-label, stat-3-number, stat-3-label, benefit-1-title, benefit-1-desc, benefit-2-title, benefit-2-desc, benefit-3-title, benefit-3-desc, benefit-4-title, benefit-4-desc, step-1-title, step-1-desc, step-2-title, step-2-desc, step-3-title, step-3-desc, testimonial-1-quote, testimonial-1-name, testimonial-1-role, testimonial-2-quote, testimonial-2-name, testimonial-2-role, testimonial-3-quote, testimonial-3-name, testimonial-3-role, pricing-plan-name, pricing-price, pricing-period, pricing-desc, faq-1-q, faq-1-a, faq-2-q, faq-2-a, faq-3-q, faq-3-a, faq-4-q, faq-4-a, final-cta-headline, final-cta-sub, final-cta-button -->
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+  <div class="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.16),_transparent_34%),linear-gradient(180deg,_#020617_0%,_#0f172a_60%)]">
+    <header class="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur-md">
+      <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+        <a href="#" class="text-lg font-semibold tracking-tight text-white">PersonaAI</a>
+        <a data-slot="nav-cta" href="#" class="rounded-full border border-slate-700 bg-slate-800 px-5 py-2 text-sm font-semibold text-cyan-300 transition hover:border-cyan-300 hover:text-white">Start Personalizing</a>
+      </div>
+    </header>
+
+    <main class="mx-auto flex max-w-6xl flex-col gap-24 px-6 py-16 lg:px-8">
+      <section class="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+        <div class="space-y-8">
+          <p data-slot="hero-eyebrow" class="inline-flex rounded-full bg-cyan-500/10 px-4 py-1 text-sm font-semibold uppercase tracking-[0.24em] text-cyan-200">AI-powered landing page personalization</p>
+          <div class="space-y-6 max-w-2xl">
+            <h1 data-slot="headline" class="text-5xl font-semibold tracking-tight text-white sm:text-6xl">Personalize every landing page with AI that understands your creative.</h1>
+            <p data-slot="subheadline" class="text-lg leading-8 text-slate-300">Generate tailored headlines, CTAs, benefits, testimonials and FAQs instantly from an ad creative and landing page design.</p>
+          </div>
+
+          <div class="flex flex-col gap-4 sm:flex-row">
+            <button data-slot="cta-primary" class="inline-flex items-center justify-center rounded-full bg-cyan-400 px-8 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300">Launch personalization</button>
+            <button data-slot="cta-secondary" class="inline-flex items-center justify-center rounded-full border border-slate-700 bg-slate-900/90 px-8 py-3 text-sm font-semibold text-slate-200 transition hover:border-cyan-300 hover:text-white">View example flow</button>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-3">
+            <div class="rounded-3xl border border-slate-800 bg-slate-900/80 p-5">
+              <p class="text-3xl font-semibold text-white"><span data-slot="social-proof-number">98%</span></p>
+              <p data-slot="social-proof-label" class="mt-2 text-sm text-slate-400">landing page conversion lift</p>
+            </div>
+            <div class="rounded-3xl border border-slate-800 bg-slate-900/80 p-5">
+              <p class="text-3xl font-semibold text-white"><span data-slot="stat-1-number">12x</span></p>
+              <p data-slot="stat-1-label" class="mt-2 text-sm text-slate-400">faster content creation</p>
+            </div>
+            <div class="rounded-3xl border border-slate-800 bg-slate-900/80 p-5">
+              <p class="text-3xl font-semibold text-white"><span data-slot="stat-2-number">350+</span></p>
+              <p data-slot="stat-2-label" class="mt-2 text-sm text-slate-400">brands already using PersonaAI</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative overflow-hidden rounded-[2rem] bg-slate-900/90 p-6 shadow-2xl shadow-cyan-500/10 sm:p-8">
+          <div class="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-cyan-500/10 to-transparent"></div>
+          <div class="relative grid gap-6">
+            <div class="flex items-center justify-between rounded-3xl border border-slate-800 bg-slate-950/95 p-4">
+              <div>
+                <p class="text-xs uppercase tracking-[0.28em] text-slate-500">Live preview</p>
+                <p class="mt-3 text-sm text-slate-300">Personalized landing page output</p>
+              </div>
+              <div class="h-10 w-10 rounded-full bg-cyan-500/10"></div>
+            </div>
+            <div class="rounded-[2rem] border border-slate-800 bg-slate-950/95 p-6 text-white">
+              <div class="grid gap-6">
+                <div class="rounded-3xl bg-slate-900/95 p-5 shadow-inner shadow-black/20">
+                  <p class="text-sm uppercase tracking-[0.22em] text-cyan-300">Hero</p>
+                  <h2 class="mt-3 text-2xl font-semibold" data-slot="headline">Sustainable copy that converts.</h2>
+                  <p class="mt-3 text-sm text-slate-400" data-slot="subheadline">A quick landing page update tailored to your campaign and audience.</p>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                  <div class="rounded-3xl bg-slate-900/95 p-4">
+                    <p class="text-xs uppercase tracking-[0.22em] text-slate-500">CTA</p>
+                    <p class="mt-2 text-sm font-semibold" data-slot="cta-primary">Try it now</p>
+                  </div>
+                  <div class="rounded-3xl bg-slate-900/95 p-4">
+                    <p class="text-xs uppercase tracking-[0.22em] text-slate-500">Benefit</p>
+                    <p class="mt-2 text-sm text-slate-300" data-slot="benefit-1-title">Better messaging</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="rounded-3xl border border-slate-800 bg-slate-950/95 p-4">
+                <p class="text-xs uppercase tracking-[0.22em] text-slate-500">Stat</p>
+                <p class="mt-2 text-xl font-semibold text-white" data-slot="stat-3-number">23%</p>
+                <p class="mt-1 text-sm text-slate-400" data-slot="stat-3-label">higher engagement</p>
+              </div>
+              <div class="rounded-3xl border border-slate-800 bg-slate-950/95 p-4">
+                <p class="text-xs uppercase tracking-[0.22em] text-slate-500">FAQ</p>
+                <p class="mt-2 text-sm text-slate-300" data-slot="faq-1-q">Is this built for marketers?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid gap-12 rounded-[2rem] border border-slate-800 bg-slate-900/95 px-6 py-12 shadow-2xl shadow-cyan-500/10 lg:grid-cols-[0.9fr_0.6fr]">
+        <div class="space-y-6">
+          <div class="space-y-4">
+            <p data-slot="benefit-2-title" class="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-300">What you get</p>
+            <h2 data-slot="benefit-2-desc" class="text-3xl font-semibold text-white">A full landing page refresh in under a minute.</h2>
+            <p class="max-w-xl text-slate-400">Build a page that feels custom to your brand, matches ad creative, and keeps the layout intact.</p>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="rounded-3xl border border-slate-800 bg-slate-950/95 p-6">
+              <h3 data-slot="benefit-3-title" class="text-lg font-semibold text-white">Creative-aware copy</h3>
+              <p data-slot="benefit-3-desc" class="mt-3 text-sm leading-6 text-slate-400">The AI uses your ad creative to choose tone, offer, and audience language.</p>
+            </div>
+            <div class="rounded-3xl border border-slate-800 bg-slate-950/95 p-6">
+              <h3 data-slot="benefit-4-title" class="text-lg font-semibold text-white">Zero layout risk</h3>
+              <p data-slot="benefit-4-desc" class="mt-3 text-sm leading-6 text-slate-400">It only updates pre-defined copy slots, so your design stays intact.</p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-[2rem] bg-slate-950/90 p-6 text-slate-300 shadow-inner shadow-black/20">
+          <div class="mb-5 rounded-3xl bg-slate-900/95 p-6">
+            <p class="text-xs uppercase tracking-[0.24em] text-cyan-300">Quick setup</p>
+            <h3 data-slot="step-1-title" class="mt-4 text-2xl font-semibold text-white">Connect your ad + landing page</h3>
+            <p data-slot="step-1-desc" class="mt-3 text-sm leading-6 text-slate-400">Upload an ad or link an image, then point to the landing page you want to enhance.</p>
+          </div>
+          <div class="space-y-4 rounded-3xl border border-slate-800 bg-slate-900/95 p-6">
+            <div>
+              <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Step 2</p>
+              <h4 data-slot="step-2-title" class="mt-3 text-lg font-semibold text-white">Generate AI copy</h4>
+              <p data-slot="step-2-desc" class="mt-2 text-sm text-slate-400">The model writes tailored page copy for your hero, benefits, pricing and more.</p>
+            </div>
+            <div>
+              <p class="text-sm uppercase tracking-[0.24em] text-slate-500">Step 3</p>
+              <h4 data-slot="step-3-title" class="mt-3 text-lg font-semibold text-white">Launch with confidence</h4>
+              <p data-slot="step-3-desc" class="mt-2 text-sm text-slate-400">Preview the personalized page, copy it, or download the finished HTML instantly.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid gap-12 lg:grid-cols-3">
+        <div class="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-8 text-slate-300 shadow-lg shadow-slate-950/40">
+          <p data-slot="testimonial-1-name" class="text-sm uppercase tracking-[0.24em] text-cyan-300">Product Marketing</p>
+          <p data-slot="testimonial-1-quote" class="mt-4 text-lg text-white">"PersonaAI made our landing pages feel instantly custom and matched our campaign tone perfectly."</p>
+          <p data-slot="testimonial-1-role" class="mt-5 text-sm text-slate-500">Sarah Johnson, Founder</p>
+        </div>
+        <div class="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-8 text-slate-300 shadow-lg shadow-slate-950/40">
+          <p data-slot="testimonial-2-name" class="text-sm uppercase tracking-[0.24em] text-cyan-300">Growth Team</p>
+          <p data-slot="testimonial-2-quote" class="mt-4 text-lg text-white">"We went from generic landing copy to targeted messaging in minutes—without changing the design."</p>
+          <p data-slot="testimonial-2-role" class="mt-5 text-sm text-slate-500">Michael Chen, Growth Lead</p>
+        </div>
+        <div class="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-8 text-slate-300 shadow-lg shadow-slate-950/40">
+          <p data-slot="testimonial-3-name" class="text-sm uppercase tracking-[0.24em] text-cyan-300">Agency</p>
+          <p data-slot="testimonial-3-quote" class="mt-4 text-lg text-white">"This tool gives us a smart page refresh that preserves layout and drives higher conversions."</p>
+          <p data-slot="testimonial-3-role" class="mt-5 text-sm text-slate-500">Emma Rodriguez, Creative Director</p>
+        </div>
+      </section>
+
+      <section class="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-8 shadow-2xl shadow-cyan-500/10">
+        <div class="grid gap-8 lg:grid-cols-[0.8fr_0.6fr]">
+          <div class="space-y-4">
+            <p data-slot="pricing-plan-name" class="text-sm uppercase tracking-[0.24em] text-cyan-300">Starter Plan</p>
+            <div class="flex items-end gap-4">
+              <span data-slot="pricing-price" class="text-5xl font-semibold text-white">$79</span>
+              <span data-slot="pricing-period" class="pb-1 text-sm text-slate-500">/month</span>
+            </div>
+            <p data-slot="pricing-desc" class="max-w-xl text-slate-400">Perfect for small teams and solo founders who want better landing page copy with zero design risk.</p>
+          </div>
+          <div class="grid gap-4 rounded-[2rem] border border-slate-800 bg-slate-950/90 p-6">
+            <div class="rounded-3xl bg-slate-900/95 p-5">
+              <p class="text-sm text-slate-400">Feature 1</p>
+              <p class="mt-2 text-sm text-white">AI-driven landing page slot copy</p>
+            </div>
+            <div class="rounded-3xl bg-slate-900/95 p-5">
+              <p class="text-sm text-slate-400">Feature 2</p>
+              <p class="mt-2 text-sm text-white">Ad creative matched personalization</p>
+            </div>
+            <div class="rounded-3xl bg-slate-900/95 p-5">
+              <p class="text-sm text-slate-400">Feature 3</p>
+              <p class="mt-2 text-sm text-white">Instant copy preview & download</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="rounded-[2rem] border border-slate-800 bg-slate-900/95 p-8 shadow-2xl shadow-slate-950/40">
+        <h2 class="text-3xl font-semibold text-white">Frequently asked questions</h2>
+        <div class="mt-8 grid gap-5">
+          <div class="rounded-3xl border border-slate-800 bg-slate-950/90 p-6">
+            <h3 data-slot="faq-1-q" class="text-lg font-semibold text-white">Can I use this with any landing page?</h3>
+            <p data-slot="faq-1-a" class="mt-3 text-sm leading-6 text-slate-400">Yes, as long as the page includes the required personalization slots.</p>
+          </div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-950/90 p-6">
+            <h3 data-slot="faq-2-q" class="text-lg font-semibold text-white">Do I need a design update?</h3>
+            <p data-slot="faq-2-a" class="mt-3 text-sm leading-6 text-slate-400">No. The tool only updates text slots, preserving your existing layout and styling.</p>
+          </div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-950/90 p-6">
+            <h3 data-slot="faq-3-q" class="text-lg font-semibold text-white">How does inspiration input work?</h3>
+            <p data-slot="faq-3-a" class="mt-3 text-sm leading-6 text-slate-400">You can provide an inspiration page URL and the AI will mimic the tone and structure.</p>
+          </div>
+          <div class="rounded-3xl border border-slate-800 bg-slate-950/90 p-6">
+            <h3 data-slot="faq-4-q" class="text-lg font-semibold text-white">What if scraping fails?</h3>
+            <p data-slot="faq-4-a" class="mt-3 text-sm leading-6 text-slate-400">Use a publicly accessible URL or test with the demo landing page provided.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="rounded-[2rem] border border-cyan-500/20 bg-slate-900/95 p-10 text-center shadow-2xl shadow-cyan-500/10">
+        <h2 data-slot="final-cta-headline" class="text-4xl font-semibold text-white sm:text-5xl">Personalized landing pages made simple.</h2>
+        <p data-slot="final-cta-sub" class="mx-auto mt-5 max-w-2xl text-base leading-7 text-slate-400">Connect your ad, personalize the page, and launch with confidence—without touching the design.</p>
+        <button data-slot="final-cta-button" class="mt-8 inline-flex rounded-full bg-cyan-400 px-8 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300">Start your free trial</button>
+      </section>
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950/95 py-8 text-slate-500">
+      <div class="mx-auto max-w-6xl px-6 text-center text-sm">
+        <p>© 2026 PersonaAI. Built for AI-driven landing page personalization.</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
