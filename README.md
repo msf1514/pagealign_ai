@@ -162,3 +162,4 @@ An earlier version sent the full HTML to Gemini and asked it to rewrite the page
 ---
 
 *Built for the Troopod PM Assignment.*
+
