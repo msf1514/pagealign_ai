@@ -6,6 +6,7 @@ import { Copy, Check, Download, Eye, Code2 } from "lucide-react";
 export default function OutputPanel({ html, changes = {} }) {
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState("preview"); // "preview" | "code"
+  const [iframeKey, setIframeKey] = useState(0);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(html);
@@ -14,11 +15,25 @@ export default function OutputPanel({ html, changes = {} }) {
   };
 
   const handleDownload = () => {
-    const blob = new Blob([html], { type: "text/html" });
+    // Wrap the HTML in a complete standalone document
+    const standaloneHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Landing Page</title>
+</head>
+<body style="margin: 0; padding: 0;">
+    ${html}
+</body>
+</html>`;
+
+    const blob = new Blob([standaloneHtml], { type: "text/html" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = "personalized-landing-page.html";
     link.click();
+    URL.revokeObjectURL(link.href);
   };
 
   const changeCount = Object.keys(changes).length;
@@ -112,10 +127,11 @@ export default function OutputPanel({ html, changes = {} }) {
             {/* Iframe - Full Page View */}
             <div className="w-full bg-white relative">
               <iframe
+                key={iframeKey}
                 srcDoc={html}
                 title="Personalized Landing Page"
                 className="w-full min-h-[720px] md:min-h-[900px] border-0 bg-white"
-                sandbox="allow-scripts allow-same-origin"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
               />
             </div>
           </div>
