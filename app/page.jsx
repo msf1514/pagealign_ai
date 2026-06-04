@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { Sparkles, UploadCloud, Link, Globe, CheckCircle2, AlertCircle, CodeXml, RefreshCw } from "lucide-react";
@@ -137,10 +137,10 @@ export default function Home() {
     </div>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full max-w-sm pt-4">
-      <a href="${landing || "#"}" target="_blank" class="w-full sm:w-auto px-6 py-2.5 bg-white text-zinc-900 hover:bg-zinc-100 rounded-lg text-xs font-semibold tracking-tight transition shadow-lg text-center">
+      <a href="${landing || "#"}" target="_blank" class="w-full sm:w-auto px-6 py-2.5 bg-white text-zinc-900 hover:bg-zinc-100 rounded-lg text-xs font-semibold tracking-tight transition shadow-lg">
         Launch Live Experiment
       </a>
-      ${inspiration ? `<span class="text-[11px] text-zinc-500 truncate" title="Inspiration active">Inspired by: <span class="text-zinc-400 font-mono">${inspiration.replace(/^https?:\/\//, "").slice(0, 20)}...</span></span>` : ""}
+      ${inspiration ? `<span class="text-[11px] text-zinc-500 truncate" title="Inspiration active">Inspired by: <span class="text-zinc-400 font-mono">${inspiration.replace(/^https?:\/\//, "").slice(0, 30)}</span></span>` : ""}
     </div>
   </main>
 
@@ -172,13 +172,21 @@ export default function Home() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Server response was not successful");
 
-      setOutput(data.html);
+      setOutput({
+        html: data.html,
+        changes: data.changes || {},
+        original: data.original || null,
+      });
     } catch (err) {
       console.warn("API Request errored or endpoint absent. Generating interactive demo template fallback...", err);
       await new Promise((resolve) => setTimeout(resolve, 1400));
 
       const mockResult = generateDemoHTML(adDescription, landingUrl, inspirationUrl);
-      setOutput(mockResult);
+      setOutput({
+        html: mockResult,
+        changes: {},
+        original: null,
+      });
       setError("Note: Live AI backend is simulated offline. Generated gorgeous design fallback above.");
     } finally {
       setLoading(false);
@@ -203,7 +211,7 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-1.5 text-zinc-100 font-semibold tracking-tight">
                 <span>PageAlign AI</span>
-                <span className="text-[10px] font-mono border border-zinc-800 bg-zinc-900 px-1.5 py-0.5 rounded text-zinc-400 font-medium">v1.2</span>
+                <span className="text-[10px] font-mono border border-zinc-800 bg-zinc-900 px-1.5 py-0.5 rounded text-zinc-400 font-medium">v1.3</span>
               </div>
               <p className="text-xs text-zinc-400">Align Landing Copy with Ads & Inspiration</p>
             </div>
@@ -226,7 +234,7 @@ export default function Home() {
             Align your landing page copy with any promotion or campaign.
           </h1>
           <p className="text-sm leading-relaxed text-zinc-400 max-w-xl">
-            Input your ad creative elements, competitor inspiration, or target pain points. Our AI maps the optimized narrative directly into your existing landing page layout structure without breaking your design system.
+            Input your ad creative elements, competitor inspiration, or target pain points. Our AI maps the optimized narrative directly into your existing landing page layout structure without breaking design integrity.
           </p>
         </section>
 
@@ -262,7 +270,7 @@ export default function Home() {
                 <h3 className="text-xs uppercase tracking-wider font-semibold font-mono text-zinc-300">Adaptive Layout Engine</h3>
               </div>
               <p className="text-xs leading-relaxed text-zinc-400">
-                Rather than rewriting entire DOM nodes, our engine intercepts copy keys and aligns them with direct campaign objectives. Fonts, background codes, styles, and styling grids remain completely unchanged.
+                Rather than rewriting entire DOM nodes, our engine intercepts copy keys and aligns them with direct campaign objectives. Fonts, background codes, styles, and styling grids remain perfectly intact.
               </p>
               <div className="pt-2 border-t border-zinc-900 space-y-2">
                 <div className="flex justify-between items-center text-[11px]">
@@ -416,7 +424,7 @@ export default function Home() {
                         <input
                           type="url"
                           placeholder="https://images.unsplash.com/your-ad-asset.jpg"
-                          className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-3.5 py-2.5 text-xs text-zinc-100 placeholder:text-zinc-650 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 transition-all font-mono"
+                          className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-3.5 py-2.5 text-xs text-zinc-100 placeholder:text-zinc-650 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-700 transition"
                           value={adUrl}
                           onChange={(e) => setAdUrl(e.target.value)}
                         />
@@ -437,7 +445,7 @@ export default function Home() {
                     <input
                       type="url"
                       placeholder="https://example.com/inspiration-competitor"
-                      className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-3.5 py-2.5 text-xs text-zinc-100 placeholder:text-zinc-650 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 transition-all font-mono"
+                      className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-3.5 py-2.5 text-xs text-zinc-100 placeholder:text-zinc-650 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-700 transition"
                       value={inspirationUrl}
                       onChange={(e) => setInspirationUrl(e.target.value)}
                     />
@@ -457,7 +465,7 @@ export default function Home() {
                     id="landing-url-field"
                     type="url"
                     placeholder="https://your-product-landing.com"
-                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-3.5 py-2.5 text-xs text-zinc-100 placeholder:text-zinc-650 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 transition-all font-mono"
+                    className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-3.5 py-2.5 text-xs text-zinc-100 placeholder:text-zinc-650 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-700 transition"
                     value={landingUrl}
                     onChange={(e) => setLandingUrl(e.target.value)}
                   />
@@ -474,7 +482,7 @@ export default function Home() {
                   id="ad-description-field"
                   rows={3}
                   placeholder="e.g., Shopify summer promotion. Focus copy on developers and fast setup speed..."
-                  className="w-full bg-zinc-950 border border-zinc-805 border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-100 placeholder:text-zinc-650 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 transition-all resize-none leading-relaxed"
+                  className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-100 placeholder:text-zinc-650 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-700 transition resize-none"
                   value={adDescription}
                   onChange={(e) => setAdDescription(e.target.value)}
                 />
@@ -491,7 +499,7 @@ export default function Home() {
                 id="submit-personalization-btn"
                 onClick={handleSubmit}
                 disabled={!isReadyToSubmit}
-                className="w-full justify-center flex items-center gap-2.5 px-5 py-3 rounded-lg font-semibold text-xs tracking-tight transition-all duration-200 cursor-pointer text-center select-none bg-white text-zinc-950 hover:bg-zinc-100 focus:outline-none focus:ring-1 focus:ring-zinc-300 active:scale-[0.99] disabled:bg-zinc-900 disabled:border disabled:border-zinc-850 disabled:text-zinc-600 disabled:cursor-not-allowed"
+                className="w-full justify-center flex items-center gap-2.5 px-5 py-3 rounded-lg font-semibold text-xs tracking-tight transition-all duration-200 cursor-pointer text-center bg-white text-zinc-950 hover:bg-zinc-100 disabled:bg-zinc-800 disabled:text-zinc-500 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
@@ -509,7 +517,13 @@ export default function Home() {
           </div>
         </section>
 
-        {output && <OutputPanel html={output} />}
+        {output && (
+          <OutputPanel
+            html={output.html}
+            changes={output.changes}
+            original={output.original}
+          />
+        )}
       </div>
     </main>
   );
