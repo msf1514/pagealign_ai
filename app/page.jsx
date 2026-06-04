@@ -175,7 +175,6 @@ export default function Home() {
       setOutput({
         html: data.html,
         changes: data.changes || {},
-        original: data.original || null,
       });
     } catch (err) {
       console.warn("API Request errored or endpoint absent. Generating interactive demo template fallback...", err);
@@ -185,7 +184,6 @@ export default function Home() {
       setOutput({
         html: mockResult,
         changes: {},
-        original: null,
       });
       setError("Note: Live AI backend is simulated offline. Generated gorgeous design fallback above.");
     } finally {
@@ -242,22 +240,22 @@ export default function Home() {
           <div className="flex gap-2.5 items-start">
             <span className="font-mono text-zinc-650 bg-zinc-900/50 border border-zinc-850 px-2 py-0.5 rounded font-bold shrink-0">01</span>
             <div>
-              <p className="font-medium text-zinc-200 font-sans">Specify Signals</p>
-              <p className="text-[11px] text-zinc-500 font-sans">Select ad creative assets or a reference competitor URL.</p>
+              <p className="font-medium text-zinc-200 font-sans">Upload Your Ad</p>
+              <p className="text-[11px] text-zinc-500 font-sans">Select an image or PDF showing your campaign creative.</p>
             </div>
           </div>
           <div className="flex gap-2.5 items-start">
             <span className="font-mono text-zinc-650 bg-zinc-900/50 border border-zinc-850 px-2 py-0.5 rounded font-bold shrink-0">02</span>
             <div>
-              <p className="font-medium text-zinc-200 font-sans">Define Pain Points</p>
-              <p className="text-[11px] text-zinc-500 font-sans">Describe the summer promotion, features, or primary user objections.</p>
+              <p className="font-medium text-zinc-200 font-sans">Add Description</p>
+              <p className="text-[11px] text-zinc-500 font-sans">Describe the campaign's target audience and messaging goals.</p>
             </div>
           </div>
           <div className="flex gap-2.5 items-start">
             <span className="font-mono text-zinc-650 bg-zinc-900/50 border border-zinc-850 px-2 py-0.5 rounded font-bold shrink-0">03</span>
             <div>
-              <p className="font-medium text-zinc-200 font-sans">Generate Page Copy</p>
-              <p className="text-[11px] text-zinc-500 font-sans">The AI aligns layout nodes instantly to solve conversion friction.</p>
+              <p className="font-medium text-zinc-200 font-sans">Get Personalized Page</p>
+              <p className="text-[11px] text-zinc-500 font-sans">AI generates your landing page optimized for the exact audience.</p>
             </div>
           </div>
         </div>
@@ -267,10 +265,10 @@ export default function Home() {
             <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-5 space-y-3.5">
               <div className="flex items-center gap-2 text-zinc-200">
                 <span className="text-zinc-400 font-mono text-sm">{`</>`}</span>
-                <h3 className="text-xs uppercase tracking-wider font-semibold font-mono text-zinc-300">Adaptive Layout Engine</h3>
+                <h3 className="text-xs uppercase tracking-wider font-semibold font-mono text-zinc-300">Smart Personalization</h3>
               </div>
               <p className="text-xs leading-relaxed text-zinc-400">
-                Rather than rewriting entire DOM nodes, our engine intercepts copy keys and aligns them with direct campaign objectives. Fonts, background codes, styles, and styling grids remain perfectly intact.
+                Your ad creative tells our AI everything: who you're targeting, what tone resonates, and what offer converts. We apply that intelligence to rewrite your landing page's copy, headlines, CTAs, and value propositions—keeping design and layout 100% intact.
               </p>
               <div className="pt-2 border-t border-zinc-900 space-y-2">
                 <div className="flex justify-between items-center text-[11px]">
@@ -278,22 +276,26 @@ export default function Home() {
                   <span className="text-emerald-400 font-mono">100% Intact</span>
                 </div>
                 <div className="flex justify-between items-center text-[11px]">
-                  <span className="text-zinc-500">CSS Consistency</span>
-                  <span className="text-emerald-400 font-mono">Preserved</span>
+                  <span className="text-zinc-500">Copy Customized</span>
+                  <span className="text-emerald-400 font-mono">Based on Ad</span>
                 </div>
               </div>
             </div>
 
             <div className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-5 space-y-3">
-              <p className="text-xs uppercase tracking-wider font-semibold font-mono text-zinc-300">Campaign Mechanics</p>
+              <p className="text-xs uppercase tracking-wider font-semibold font-mono text-zinc-300">How It Works</p>
               <div className="space-y-3 text-xs">
                 <div>
-                  <h4 className="font-medium text-zinc-205 text-zinc-200">Option 01: Ad Creative Path</h4>
-                  <p className="text-[11px] text-zinc-500 mt-0.5">Analyze ad images or descriptions to distill distinct hooks and core CTAs.</p>
+                  <h4 className="font-medium text-zinc-200">Step 1: Ad Analysis</h4>
+                  <p className="text-[11px] text-zinc-500 mt-0.5">Our AI examines your ad creative to understand your campaign's core message and audience.</p>
                 </div>
                 <div className="pt-2.5 border-t border-zinc-900">
-                  <h4 className="font-medium text-zinc-205 text-zinc-200">Option 02: Inspiration Engine</h4>
-                  <p className="text-[11px] text-zinc-500 mt-0.5">Synthesize style rules and direct copy tones from pristine competitors instantly.</p>
+                  <h4 className="font-medium text-zinc-200">Step 2: Landing Page Scrape</h4>
+                  <p className="text-[11px] text-zinc-500 mt-0.5">We fetch your landing page and identify all content that can be personalized.</p>
+                </div>
+                <div className="pt-2.5 border-t border-zinc-900">
+                  <h4 className="font-medium text-zinc-200">Step 3: Smart Injection</h4>
+                  <p className="text-[11px] text-zinc-500 mt-0.5">Personalized copy is injected into your page, creating a perfect match for your campaign.</p>
                 </div>
               </div>
             </div>
@@ -301,157 +303,100 @@ export default function Home() {
 
           <div className="lg:col-span-7 bg-[#0c0d0f] border border-zinc-800 rounded-xl p-6 sm:p-8 space-y-6 shadow-xl">
             <div className="space-y-1.5 pb-4 border-b border-zinc-900">
-              <h2 className="text-base font-semibold text-white tracking-tight">Control Center</h2>
-              <p className="text-xs text-zinc-400">Provide parameters below to construct optimized landing structures.</p>
+              <h2 className="text-base font-semibold text-white tracking-tight">Personalize Your Landing Page</h2>
+              <p className="text-xs text-zinc-400">Upload your ad and describe your campaign to get started.</p>
             </div>
             <div className="space-y-4">
               <div className="space-y-2">
-                <label className="block text-xs font-medium text-zinc-300">Choose Analysis Path</label>
-                <div className="flex p-0.5 rounded-lg bg-zinc-950 border border-zinc-900">
+                <label className="block text-xs font-medium text-zinc-300">Ad Creative Format</label>
+                <div className="flex p-0.5 rounded-lg bg-zinc-950 border border-zinc-900 w-full">
                   <button
                     type="button"
-                    onClick={() => setInputMode("creative")}
-                    className={`flex-1 flex items-center justify-center gap-1.5 rounded-md py-2 text-xs font-medium transition cursor-pointer ${
-                      inputMode === "creative"
-                        ? "bg-zinc-800 text-white border border-zinc-850 shadow-sm"
+                    onClick={() => setAdInputType("upload")}
+                    className={`flex-1 py-1.5 text-[11px] font-medium rounded transition cursor-pointer ${
+                      adInputType === "upload"
+                        ? "bg-zinc-800 text-white"
                         : "text-zinc-500 hover:text-zinc-300"
                     }`}
                   >
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>Ad Creative Assets</span>
+                    File Upload
                   </button>
                   <button
                     type="button"
-                    onClick={() => setInputMode("inspiration")}
-                    className={`flex-1 flex items-center justify-center gap-1.5 rounded-md py-2 text-xs font-medium transition cursor-pointer ${
-                      inputMode === "inspiration"
-                        ? "bg-zinc-800 text-white border border-zinc-850 shadow-sm"
+                    onClick={() => setAdInputType("url")}
+                    className={`flex-1 py-1.5 text-[11px] font-medium rounded transition cursor-pointer ${
+                      adInputType === "url"
+                        ? "bg-zinc-800 text-white"
                         : "text-zinc-500 hover:text-zinc-300"
                     }`}
                   >
-                    <Globe className="w-3.5 h-3.5" />
-                    <span>Inspiration URL</span>
+                    Image URL
                   </button>
                 </div>
               </div>
 
-              {inputMode === "creative" && (
-                <div className="space-y-4 pt-1 animate-fadeIn">
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <label className="block text-[11px] font-medium text-zinc-300">Ad Creative Format</label>
-                      <span className="text-[10px] text-zinc-500 font-mono">Image or PDF supported</span>
+              {adInputType === "upload" ? (
+                <div className="space-y-2">
+                  <div
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                    className={`border border-dashed rounded-xl p-5 text-center flex flex-col items-center justify-center transition-all cursor-pointer relative ${
+                      isDragging
+                        ? "border-zinc-400 bg-zinc-900/60"
+                        : "border-zinc-800 bg-zinc-950/40 hover:bg-zinc-950/90 hover:border-zinc-700"
+                    }`}
+                  >
+                    <input
+                      type="file"
+                      accept="image/*,.pdf"
+                      onChange={handleFileUpload}
+                      className="opacity-0 absolute inset-0 w-full h-full cursor-pointer min-h-[44px]"
+                    />
+                    <div className="p-2.5 rounded-full bg-zinc-900 border border-zinc-850 mb-3 text-zinc-400 pointer-events-none">
+                      <UploadCloud className="w-5 h-5" />
                     </div>
-                    <div className="flex p-0.5 rounded-lg bg-zinc-950 border border-zinc-900 w-full">
-                      <button
-                        type="button"
-                        onClick={() => setAdInputType("upload")}
-                        className={`flex-1 py-1.5 text-[11px] font-medium rounded transition cursor-pointer ${
-                          adInputType === "upload"
-                            ? "bg-zinc-800 text-white"
-                            : "text-zinc-500 hover:text-zinc-300"
-                        }`}
-                      >
-                        File Upload
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setAdInputType("url")}
-                        className={`flex-1 py-1.5 text-[11px] font-medium rounded transition cursor-pointer ${
-                          adInputType === "url"
-                            ? "bg-zinc-800 text-white"
-                            : "text-zinc-500 hover:text-zinc-300"
-                        }`}
-                      >
-                        Image URL
-                      </button>
-                    </div>
+                    <p className="text-xs font-medium text-zinc-200 pointer-events-none">
+                      {selectedFileName ? selectedFileName : "Click or drag files here to upload"}
+                    </p>
+                    <p className="text-[10px] text-zinc-500 mt-1 pointer-events-none">PDF or JPG, PNG max-size 8MB</p>
                   </div>
 
-                  {adInputType === "upload" ? (
-                    <div className="space-y-2">
-                      <div
-                        onDragOver={handleDragOver}
-                        onDragLeave={handleDragLeave}
-                        onDrop={handleDrop}
-                        className={`border border-dashed rounded-xl p-5 text-center flex flex-col items-center justify-center transition-all cursor-pointer relative ${
-                          isDragging
-                            ? "border-zinc-400 bg-zinc-900/60"
-                            : "border-zinc-800 bg-zinc-950/40 hover:bg-zinc-950/90 hover:border-zinc-700"
-                        }`}
-                      >
-                        <input
-                          type="file"
-                          accept="image/*,.pdf"
-                          onChange={handleFileUpload}
-                          className="opacity-0 absolute inset-0 w-full h-full cursor-pointer min-h-[44px]"
-                        />
-                        <div className="p-2.5 rounded-full bg-zinc-900 border border-zinc-850 mb-3 text-zinc-400 pointer-events-none">
-                          <UploadCloud className="w-5 h-5" />
-                        </div>
-                        <p className="text-xs font-medium text-zinc-200 pointer-events-none">
-                          {selectedFileName ? selectedFileName : "Click or drag files here to upload"}
-                        </p>
-                        <p className="text-[10px] text-zinc-500 mt-1 pointer-events-none">PDF or JPG, PNG max-size 8MB</p>
-                      </div>
-
-                      {adPreview && (
-                        <div className="p-2.5 bg-zinc-950 rounded-xl border border-zinc-850 flex items-center justify-between gap-3 overflow-hidden">
-                          <div className="flex items-center gap-2.5 min-w-0">
-                            {adImageMimeType === "application/pdf" ? (
-                              <div className="w-10 h-10 rounded bg-red-950/35 border border-red-900/60 flex items-center justify-center shrink-0">
-                                <span className="text-[10px] font-bold text-red-400">PDF</span>
-                              </div>
-                            ) : (
-                              <img src={adPreview} alt="Image preview" className="w-10 h-10 object-cover rounded bg-zinc-900 border border-zinc-800 shrink-0" />
-                            )}
-                            <div className="min-w-0">
-                              <p className="text-xs text-zinc-200 truncate font-mono">{selectedFileName || "source-creative-asset"}</p>
-                              <p className="text-[10px] text-zinc-500 font-mono">{adImageMimeType || "image/preset"}</p>
-                            </div>
+                  {adPreview && (
+                    <div className="p-2.5 bg-zinc-950 rounded-xl border border-zinc-850 flex items-center justify-between gap-3 overflow-hidden">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        {adImageMimeType === "application/pdf" ? (
+                          <div className="w-10 h-10 rounded bg-red-950/35 border border-red-900/60 flex items-center justify-center shrink-0">
+                            <span className="text-[10px] font-bold text-red-400">PDF</span>
                           </div>
-                          <span className="inline-flex items-center gap-1 text-[10px] font-mono font-medium text-emerald-400 px-2 py-0.5 rounded-full bg-emerald-950/25 border border-emerald-900/30">
-                            <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                            Ready
-                          </span>
+                        ) : (
+                          <img src={adPreview} alt="Image preview" className="w-10 h-10 object-cover rounded bg-zinc-900 border border-zinc-800 shrink-0" />
+                        )}
+                        <div className="min-w-0">
+                          <p className="text-xs text-zinc-200 truncate font-mono">{selectedFileName || "source-creative-asset"}</p>
+                          <p className="text-[10px] text-zinc-500 font-mono">{adImageMimeType || "image/preset"}</p>
                         </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="space-y-1.5">
-                      <label className="block text-[11px] font-medium text-zinc-400">Creative Image URL</label>
-                      <div className="relative">
-                        <input
-                          type="url"
-                          placeholder="https://images.unsplash.com/your-ad-asset.jpg"
-                          className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-3.5 py-2.5 text-xs text-zinc-100 placeholder:text-zinc-650 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-700 transition"
-                          value={adUrl}
-                          onChange={(e) => setAdUrl(e.target.value)}
-                        />
-                        <Link className="w-3.5 h-3.5 text-zinc-600 absolute left-3 top-3.5 pointer-events-none" />
                       </div>
+                      <span className="inline-flex items-center gap-1 text-[10px] font-mono font-medium text-emerald-400 px-2 py-0.5 rounded-full bg-emerald-950/25 border border-emerald-900/30">
+                        <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                        Ready
+                      </span>
                     </div>
                   )}
                 </div>
-              )}
-
-              {inputMode === "inspiration" && (
-                <div className="space-y-1.5 pt-1 animate-fadeIn">
-                  <div className="flex justify-between items-center text-xs">
-                    <label className="block font-medium text-zinc-300">Inspiration URL</label>
-                    <span className="text-[10px] text-zinc-500">Benchmark layout</span>
-                  </div>
+              ) : (
+                <div className="space-y-1.5">
+                  <label className="block text-[11px] font-medium text-zinc-400">Creative Image URL</label>
                   <div className="relative">
                     <input
                       type="url"
-                      placeholder="https://example.com/inspiration-competitor"
+                      placeholder="https://images.unsplash.com/your-ad-asset.jpg"
                       className="w-full bg-zinc-950 border border-zinc-800 rounded-lg pl-9 pr-3.5 py-2.5 text-xs text-zinc-100 placeholder:text-zinc-650 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-700 transition"
-                      value={inspirationUrl}
-                      onChange={(e) => setInspirationUrl(e.target.value)}
+                      value={adUrl}
+                      onChange={(e) => setAdUrl(e.target.value)}
                     />
-                    <Globe className="w-3.5 h-3.5 text-zinc-600 absolute left-3 top-3.5 pointer-events-none" />
+                    <Link className="w-3.5 h-3.5 text-zinc-600 absolute left-3 top-3.5 pointer-events-none" />
                   </div>
-                  <p className="text-[10px] text-zinc-500 leading-relaxed font-sans mt-1">AI aligns text metrics, style grids, and branding structures from this benchmark page.</p>
                 </div>
               )}
 
@@ -475,13 +420,13 @@ export default function Home() {
 
               <div className="space-y-1.5">
                 <div className="flex justify-between items-center text-xs">
-                  <label htmlFor="ad-description-field" className="block font-medium text-zinc-300">Campaign Narrative / Objectives</label>
-                  <span className="text-[10px] text-zinc-500">Optional context</span>
+                  <label htmlFor="ad-description-field" className="block font-medium text-zinc-300">Campaign Description & Goals</label>
+                  <span className="text-[10px] text-zinc-500">Required</span>
                 </div>
                 <textarea
                   id="ad-description-field"
-                  rows={3}
-                  placeholder="e.g., Shopify summer promotion. Focus copy on developers and fast setup speed..."
+                  rows={4}
+                  placeholder="e.g., Summer promotion targeting developers. Key message: Easy setup in 5 minutes. Focus on speed, reliability, and cost savings. Tone: Technical but approachable."
                   className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-3.5 py-2.5 text-xs text-zinc-100 placeholder:text-zinc-650 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-700 transition resize-none"
                   value={adDescription}
                   onChange={(e) => setAdDescription(e.target.value)}
@@ -504,12 +449,12 @@ export default function Home() {
                 {loading ? (
                   <>
                     <RefreshCw className="w-4 h-4 animate-spin text-zinc-800" />
-                    <span>Analyzing & Mapping Assets...</span>
+                    <span>Analyzing & Personalizing...</span>
                   </>
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4 text-zinc-800" />
-                    <span>Personalize Landing Copy</span>
+                    <span>Generate Personalized Page</span>
                   </>
                 )}
               </button>
@@ -521,7 +466,6 @@ export default function Home() {
           <OutputPanel
             html={output.html}
             changes={output.changes}
-            original={output.original}
           />
         )}
       </div>
