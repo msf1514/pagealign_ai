@@ -92,9 +92,9 @@ ${JSON.stringify(
 
 ${adDescription ? `Ad Description: ${adDescription}` : ""}`;
 
-    const geminiInputs = [generationPrompt];
+    const parts = [{ text: generationPrompt }];
     if (finalAdBase64) {
-      geminiInputs.push({
+      parts.push({
         inlineData: {
           mimeType: finalAdMimeType,
           data: finalAdBase64,
@@ -112,7 +112,7 @@ ${adDescription ? `Ad Description: ${adDescription}` : ""}`;
           .getGenerativeModel({ model: "gemini-3.1-flash-lite-preview" })
           .generateContent(
             {
-              contents: geminiInputs,
+              contents: [{ role: "user", parts }],
               generationConfig: {
                 responseMimeType: "application/json",
                 maxOutputTokens: 1200,
