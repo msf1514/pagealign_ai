@@ -3,6 +3,8 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { SLOTS } from "../../lib/slots";
 import { injectSlots } from "../../lib/injectSlots";
 import { smartInject } from "../../lib/smartInject";
+import { convertRelativeUrlsToAbsolute } from "../../lib/urlConverter";
+import { trackChanges } from "../../lib/changeTracker";
 
 const firecrawl = new FirecrawlApp({ apiKey: process.env.FIRECRAWL_API_KEY });
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -71,7 +73,7 @@ export async function POST(req) {
 
     const generationPrompt = `You are a conversion copywriter and brand strategist.
 
-${adImageBase64 || adUrl ? "You will be given an ad creative (image or PDF) and an optional description of the ad." : "You will be given an inspiration page URL and an optional description of the desired landing page."}
+${adImageBase64 || adUrl ? "You will be given an ad creative (image or PDF) and an optional description of the ad." : "You will be given an inspiration page URL and an optional description of the campaign."}
 ${inspirationUrl ? `Use the inspiration page to match tone, style, and brand voice: ${inspirationUrl}
 ` : ""}
 Your job is to generate personalized copy for a landing page that matches the creative direction.
@@ -139,17 +141,30 @@ ${adDescription ? `Ad Description: ${adDescription}` : ""}`;
       );
     }
 
-    // Step 3: Inject Gemini JSON into scraped HTML
+    // Step 3: Fix relative URLs in scraped HTML
+    scrapedHtml = convertRelativeUrlsToAbsolute(scrapedHtml, landingUrl);
+
+    // Step 4: Inject Gemini JSON into scraped HTML
     // Use data-slot injection for pre-tagged pages, smart injection for arbitrary pages
     const hasDataSlots = /data-slot=/.test(scrapedHtml);
     const finalHtml = hasDataSlots
       ? injectSlots(scrapedHtml, slotJson)
       : smartInject(scrapedHtml, slotJson);
 
-    return Response.json({ html: finalHtml }, { status: 200 });
+    // Step 5: Track changes for the UI
+    const changes = hasDataSlots ? trackChanges(scrapedHtml, slotJson) : {};
+
+    return Response.json(
+      { 
+        html: finalHtml,
+        changes,
+        original: scrapedHtml,
+      },
+      { status: 200 }
+    );
 
   } catch (err) {
-    console.error("Troopod API error:", err);
+    console.error("PageAlign API error:", err);
     return Response.json(
       { error: "Internal server error" },
       { status: 500 }
