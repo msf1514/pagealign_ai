@@ -2,6 +2,7 @@ import FirecrawlApp from "@mendable/firecrawl-js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { SLOTS } from "../../lib/slots";
 import { injectSlots } from "../../lib/injectSlots";
+import { smartInject } from "../../lib/smartInject";
 
 const firecrawl = new FirecrawlApp({ apiKey: process.env.FIRECRAWL_API_KEY });
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -29,39 +30,6 @@ function extractGeminiJson(result) {
   } catch (err) {
     throw new Error(`Unable to parse Gemini JSON response. Received: ${cleaned.slice(0, 512)}`);
   }
-}
-
-function buildUniversalPrompt({ adImageBase64, adUrl, adDescription, inspirationUrl, elements }) {
-  return `You are a conversion copywriter and landing page optimization expert.
-
-${adImageBase64 || adUrl ? "You will be given an ad creative (image or PDF) and an optional description of the ad." : "You will be given an inspiration page URL and an optional description of the desired landing page."}
-${inspirationUrl ? `Use the inspiration page to match tone, style, and brand voice: ${inspirationUrl}\n` : ""}
-You will also be given a list of text elements extracted from a landing page, each identified by a unique ID.
-
-Your job is to personalize the landing page copy to align with the ad creative's messaging, audience, and tone.
-
-Analyze the ad creative to determine:
-- Target audience (who is this ad speaking to?)
-- Tone and language style (bold, friendly, professional, urgent?)
-- Core offer and value proposition (what is being promised?)
-- Call to action intent (what action should the user take?)
-
-Then rewrite the relevant text elements to match.
-
-Rules:
-- ONLY replace elements that are personalizable content: headlines, subheadlines, hero text, descriptions, calls-to-action, benefit statements, feature descriptions, testimonials, pricing text, FAQ content, section headings.
-- Do NOT replace: navigation menu labels, footer text, copyright notices, form field labels, technical text, brand names/logos, legal disclaimers, dates, image alt text, metadata.
-- Keep replacement text SIMILAR in length to the original — do not make short text dramatically longer or vice versa.
-- Match the ad creative's target audience, tone, and value proposition.
-- Maintain the page's existing voice and intent where possible — personalize, don't rewrite from scratch.
-
-Return ONLY a valid JSON object mapping element IDs to their new text values.
-Only include elements you want to change — omit elements that should stay the same.
-No explanation, no markdown, no backticks.
-
-${adDescription ? `Ad Description: ${adDescription}\n` : ""}
-Page elements:
-${JSON.stringify(elements, null, 2)}`;
 }
 
 export async function POST(req) {
@@ -97,7 +65,7 @@ export async function POST(req) {
       }
     }
 
-    // Step 2: Run Firecrawl + Gemini (slot-based) in parallel — identical to original flow
+    // Step 2: Run Firecrawl + Gemini in parallel
     let scrapedHtml = "";
     let slotJson = {};
 
@@ -171,65 +139,15 @@ ${adDescription ? `Ad Description: ${adDescription}` : ""}`;
       );
     }
 
-    // Step 3: Check if the page has data-slot attributes
+    // Step 3: Inject Gemini JSON into scraped HTML
+    // Use data-slot injection for pre-tagged pages, smart injection for arbitrary pages
     const hasDataSlots = /data-slot=/.test(scrapedHtml);
+    const finalHtml = hasDataSlots
+      ? injectSlots(scrapedHtml, slotJson)
+      : smartInject(scrapedHtml, slotJson);
 
-    if (hasDataSlots) {
-      // ─── Slot-based flow (pre-tagged pages) — use the already-generated slot JSON ───
-      const finalHtml = injectSlots(scrapedHtml, slotJson);
-      return Response.json({ html: finalHtml }, { status: 200 });
-    }
+    return Response.json({ html: finalHtml }, { status: 200 });
 
-    // ─── Universal flow (arbitrary pages without data-slot) ───
-    // Dynamically import cheerio-based modules to avoid bundling issues
-    const { analyzePage } = await import("../../lib/analyzePage");
-    const { injectDynamic } = await import("../../lib/injectDynamic");
-
-    const { taggedHtml, elements } = analyzePage(scrapedHtml);
-
-    if (elements.length === 0) {
-      return Response.json({ html: scrapedHtml }, { status: 200 });
-    }
-
-    const universalPrompt = buildUniversalPrompt({
-      adImageBase64: finalAdBase64,
-      adUrl,
-      adDescription,
-      inspirationUrl,
-      elements,
-    });
-
-    const universalGeminiInputs = [universalPrompt];
-    if (finalAdBase64) {
-      universalGeminiInputs.push({
-        inlineData: { mimeType: finalAdMimeType, data: finalAdBase64 },
-      });
-    }
-
-    try {
-      const universalResult = await genAI
-        .getGenerativeModel({ model: "gemini-3.1-flash-lite-preview" })
-        .generateContent(
-          {
-            contents: universalGeminiInputs,
-            generationConfig: {
-              responseMimeType: "application/json",
-              maxOutputTokens: 4096,
-              temperature: 0.7,
-            },
-          },
-          { timeout: 120000 }
-        );
-      const replacements = extractGeminiJson(universalResult);
-      const finalHtml = injectDynamic(taggedHtml, replacements);
-      return Response.json({ html: finalHtml }, { status: 200 });
-    } catch (geminiErr) {
-      console.error("Gemini universal error:", geminiErr);
-      return Response.json(
-        { error: geminiErr.message || "Failed to generate personalized content" },
-        { status: 500 }
-      );
-    }
   } catch (err) {
     console.error("Troopod API error:", err);
     return Response.json(
