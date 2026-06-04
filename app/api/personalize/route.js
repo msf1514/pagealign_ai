@@ -126,14 +126,17 @@ ${adDescription ? `Ad Description: ${adDescription}` : ""}`;
       ]);
 
       if (!fcResult?.success || typeof fcResult.rawHtml !== "string") {
-        console.error("Firecrawl result:", JSON.stringify({
+        const debug = {
           success: fcResult?.success,
-          hasRawHtml: typeof fcResult?.rawHtml,
+          rawHtmlType: typeof fcResult?.rawHtml,
           keys: fcResult ? Object.keys(fcResult) : [],
           error: fcResult?.error,
-        }));
-        throw new Error(
-          fcResult?.error || "Firecrawl failed to scrape the page"
+          statusCode: fcResult?.statusCode,
+        };
+        console.error("Firecrawl result:", JSON.stringify(debug));
+        return Response.json(
+          { error: "Firecrawl failed to scrape the page", debug },
+          { status: 500 }
         );
       }
 
