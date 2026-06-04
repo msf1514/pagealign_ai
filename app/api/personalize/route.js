@@ -125,19 +125,8 @@ ${adDescription ? `Ad Description: ${adDescription}` : ""}`;
           ),
       ]);
 
-      if (!fcResult?.success || typeof fcResult.rawHtml !== "string") {
-        const debug = {
-          success: fcResult?.success,
-          rawHtmlType: typeof fcResult?.rawHtml,
-          keys: fcResult ? Object.keys(fcResult) : [],
-          error: fcResult?.error,
-          statusCode: fcResult?.statusCode,
-        };
-        console.error("Firecrawl result:", JSON.stringify(debug));
-        return Response.json(
-          { error: "Firecrawl failed to scrape the page", debug },
-          { status: 500 }
-        );
+      if (typeof fcResult?.rawHtml !== "string") {
+        throw new Error("Firecrawl failed to scrape the page");
       }
 
       scrapedHtml = fcResult.rawHtml;
