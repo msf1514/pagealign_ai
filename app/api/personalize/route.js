@@ -126,7 +126,15 @@ ${adDescription ? `Ad Description: ${adDescription}` : ""}`;
       ]);
 
       if (!fcResult?.success || typeof fcResult.rawHtml !== "string") {
-        throw new Error("Firecrawl failed to scrape the page");
+        console.error("Firecrawl result:", JSON.stringify({
+          success: fcResult?.success,
+          hasRawHtml: typeof fcResult?.rawHtml,
+          keys: fcResult ? Object.keys(fcResult) : [],
+          error: fcResult?.error,
+        }));
+        throw new Error(
+          fcResult?.error || "Firecrawl failed to scrape the page"
+        );
       }
 
       scrapedHtml = fcResult.rawHtml;
